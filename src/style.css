@@ -1,0 +1,130 @@
+:root {
+    /* Color theme */
+    --ct-darker: #2d2d2d;
+    --ct-dark: #3d3d3d;
+    --ct-grey: #535353;
+    --ct-numix: #d64937;
+    --ct-blue: #379cd6;
+    --ct-green: #5cd637;
+    --ct-light: #dcdcdc;
+    --ct-white: #ffffff;
+    /* Color theme (filter) for SVG images */
+    --filter-darker: invert(11%) sepia(0%) saturate(0%) hue-rotate(217deg)
+        brightness(102%) contrast(84%);
+    --filter-dark: invert(15%) sepia(0%) saturate(1327%) hue-rotate(271deg)
+        brightness(101%) contrast(74%);
+    --filter-grey: invert(32%) sepia(0%) saturate(0%) hue-rotate(320deg)
+        brightness(95%) contrast(89%);
+    --filter-numix: invert(34%) sepia(22%) saturate(6773%) hue-rotate(345deg)
+        brightness(92%) contrast(80%);
+    --filter-light: invert(99%) sepia(0%) saturate(4028%) hue-rotate(193deg)
+        brightness(123%) contrast(73%);
+    --filter-white: invert(93%) sepia(100%) saturate(0%) hue-rotate(37deg)
+        brightness(105%) contrast(102%);
+
+    /* Elements height */
+    --navbar-h: 3.8rem;
+    --side-panel-length: 15rem;
+    --content-h: calc(
+        100vh - var(--navbar-h) - var(--footer-h) - var(--side-panel-length)
+    );
+    --footer-h: 3rem;
+
+    /* Font size */
+    --logo-fs: 1.3rem;
+    --navbar-fs: 1rem;
+    --header-fs: 1.8rem;
+    --subheader-fs: 1.4rem;
+    --subheader-sm-fs: 1.3rem;
+    --content-fs: 0.9rem;
+
+    --taskRow-h: 4rem;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    color: var(--ct-darker);
+}
+
+/* --------------------- Section -------------------- */
+/* --------------------- Section -------------------- */
+/* --------------------- Section -------------------- */
+/* --------------------- Section -------------------- */
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+}
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    :root {
+        --logo-fs: 1.4rem;
+        --navbar-fs: 1rem;
+        --header-fs: 1.9rem;
+        --subheader-fs: 1.5rem;
+        --subheader-sm-fs: 1.4rem;
+        --content-fs: 1rem;
+    }
+}
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    :root {
+        --logo-fs: 1.5rem;
+        --navbar-fs: 1.1rem;
+        --header-fs: 2rem;
+        --subheader-fs: 1.6rem;
+        --subheader-sm-fs: 1.5rem;
+        --content-fs: 1rem;
+
+        /* Elements height */
+        --side-panel-length: min(14rem, 40%);
+        --content-h: calc(100vh - var(--navbar-h) - var(--footer-h));
+    }
+}
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+}
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+}
+
+/* ------------------------ Animations --------------------*/
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideDown {
+    0% {
+        transform: translate(0, -100%);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes slideRight {
+    0% {
+        transform: translate(-100%);
+    }
+    100% {
+        transform: translate(0);
+    }
+}
+
+@keyframes scaleX {
+    0% {
+        transform: scaleX(0);
+    }
+    100% {
+        transform: scaleX(100%);
+    }
+}
