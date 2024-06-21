@@ -6,7 +6,7 @@ module.exports = {
     devtool: 'inline-source-map',
     plugins: [
         new HtmlWebpackPlugin({
-            title: "Webpack template",
+            title: "TOP-Battleship",
             favicon: 'src/assets/favicon.ico',
         }),
     ],

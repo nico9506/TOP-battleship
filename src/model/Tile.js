@@ -1,0 +1,9 @@
+const Tile = class {
+  /**
+   * 
+   */
+
+  constructor() {
+
+  }
+}
