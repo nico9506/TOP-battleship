@@ -21,8 +21,14 @@ const Tile = class {
     return this.#isHit;
   }
 
+  set ship(value) {
+    this.#ship = value;
+  }
+
   // Public methods
-  markTileasHit() {
+  markTileAsHit() {
     this.#isHit = true;
   }
 };
+
+module.exports = Tile;
