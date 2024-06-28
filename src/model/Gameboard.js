@@ -75,13 +75,28 @@ const Gameboard = class {
     let tmpIndex = startIndex;
 
     for (let i = 0; i < shipInstance.size; i++) {
-      if (99 < tmpIndex) return false; // Out of board
-      if (this.#arrayOfTiles[tmpIndex].ship instanceof Ship) return false; // Tile not available
+      // Out of board
+      if (99 < tmpIndex) return false;
+
+      // Tile not available
+      if (this.#arrayOfTiles[tmpIndex].ship instanceof Ship) return false;
+
+      // Math.floor(index/10) returns the first digit of the index (current row).
+      // Check if there is enough space to place the ship in that row.
+      if (
+        !traverseVertically &&
+        Math.floor(startIndex / 10) !== Math.floor(tmpIndex / 10)
+      )
+        return false;
+
+      // Saves the available tiles already checked
       tilesChecked.push(tmpIndex);
+
+      // Modify the index according the specified orientation
       traverseVertically ? (tmpIndex += 10) : tmpIndex++;
     }
 
-    // Assign Ships to Tiles
+    // Assign Ships to Checked Tiles
     tilesChecked.forEach(
       (index) => (this.#arrayOfTiles[index].ship = shipInstance),
     );
@@ -114,7 +129,7 @@ const Gameboard = class {
     if (tileIndex < 0 || 99 < tileIndex) return false; // Not a valid coordinate;
 
     // Check tiles and place ships in board
-    return this.#traverseBoardTiles(shipInstance, tileIndex);
+    return this.#traverseBoardTiles(shipInstance, tileIndex, verticalPosition);
   }
 };
 
