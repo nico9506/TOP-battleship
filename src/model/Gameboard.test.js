@@ -64,12 +64,8 @@ describe("Gameboard class inner methods testing", () => {
     expect(boardTest.arrayOfTiles[98].ship).toBeNull();
   });
 
-  test("Assign ships to Gameboard", () => {
+  test("Test positioning of ships in gameboard", () => {
     const boardTest = new Gameboard();
-    const shipTest1 = new Ship(1);
-    const shipTest2 = new Ship(2);
-    const shipTest3 = new Ship(3);
-    const shipTest4 = new Ship(4);
     const shipTest5 = new Ship(5);
     expect(
       boardTest.placeShipInGameboard(shipTest5, 5, "D", true),
@@ -92,5 +88,62 @@ describe("Gameboard class inner methods testing", () => {
     expect(
       boardTest.placeShipInGameboard(shipTest5, 10, "j", false),
     ).toBeFalsy();
+  });
+
+  test("Test limit of ships in gameboard", () => {
+    const boardTest = new Gameboard();
+    const shipTest1 = new Ship(2);
+    const shipTest2 = new Ship(3);
+    const shipTest3 = new Ship(3);
+    const shipTest4 = new Ship(4);
+    const shipTest5 = new Ship(5);
+    expect(
+      boardTest.placeShipInGameboard(shipTest1, 1, "a", true),
+    ).toBeTruthy();
+    expect(
+      boardTest.placeShipInGameboard(shipTest1, 1, "b", true),
+    ).toBeTruthy();
+    expect(
+      boardTest.placeShipInGameboard(shipTest1, 1, "c", true),
+    ).toBeTruthy();
+    expect(
+      boardTest.placeShipInGameboard(shipTest1, 1, "d", true),
+    ).toBeTruthy();
+    expect(
+      boardTest.placeShipInGameboard(shipTest1, 1, "e", true),
+    ).toBeTruthy();
+    expect(
+      boardTest.placeShipInGameboard(shipTest2, 1, "f", true),
+    ).toBeTruthy();
+    expect(
+      boardTest.placeShipInGameboard(shipTest2, 1, "g", true),
+    ).toBeTruthy();
+    expect(
+      boardTest.placeShipInGameboard(shipTest2, 1, "h", true),
+    ).toBeTruthy();
+    expect(
+      boardTest.placeShipInGameboard(shipTest2, 1, "i", true),
+    ).toBeTruthy();
+    expect(
+      boardTest.placeShipInGameboard(shipTest3, 1, "j", true),
+    ).toBeTruthy();
+    expect(
+      boardTest.placeShipInGameboard(shipTest3, 3, "a", true),
+    ).toBeTruthy();
+    expect(
+      boardTest.placeShipInGameboard(shipTest3, 3, "b", true),
+    ).toBeTruthy();
+    expect(
+      boardTest.placeShipInGameboard(shipTest4, 3, "c", true),
+    ).toBeTruthy();
+    expect(
+      boardTest.placeShipInGameboard(shipTest4, 3, "d", true),
+    ).toBeTruthy();
+    expect(
+      boardTest.placeShipInGameboard(shipTest5, 3, "e", true),
+    ).toBeTruthy();
+    expect(boardTest.placeShipInGameboard(shipTest1, 8, "a", true)).toBeFalsy();
+    expect(boardTest.placeShipInGameboard(shipTest1, 9, "a", true)).toBeFalsy();
+    expect(boardTest.placeShipInGameboard(shipTest5, 9, "e", true)).toBeFalsy();
   });
 });

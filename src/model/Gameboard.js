@@ -12,7 +12,7 @@ const Gameboard = class {
    *      .     [30, 31                      ]
    *      .     [40, 41                      ]
    *      .       .   .
-   *      10    [90, 91, ...,              99]
+   *      9     [90, 91, ...,              99]
    *
    * Each array element has a Tile (class)
    */
@@ -44,6 +44,16 @@ const Gameboard = class {
   }
 
   #isBoardFull() {
+    /**
+     * The 1990 Milton Bradley version of the rules specify the following ships:
+     * No.  ClassOfShip.  Size
+     * 1    Carrier       5
+     * 2    Battleship    4
+     * 3    Cruiser       3
+     * 4    Submarine     3
+     * 5    Destroyer     2
+     */
+
     return this.#shipsPlaced >= 15 ? true : false;
   }
 
@@ -96,10 +106,12 @@ const Gameboard = class {
       traverseVertically ? (tmpIndex += 10) : tmpIndex++;
     }
 
-    // Assign Ships to Checked Tiles
+    // Assign Ship to Checked Tiles
     tilesChecked.forEach(
       (index) => (this.#arrayOfTiles[index].ship = shipInstance),
     );
+
+    this.#shipsPlaced++;
 
     return true;
   }

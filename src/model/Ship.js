@@ -40,19 +40,19 @@ const Ship = class {
   // Private methods
   #checkShip() {
     if (this.#isSunk) {
-      console.log("Ship is sunk");
+      // console.log("Ship is sunk");
       return;
     }
 
     if (this.#timesHit === this.#size) {
-      console.log("Ship has been sunk");
+      // console.log("Ship has been sunk");
       this.#isSunk = true;
       return;
     }
 
-    console.log(
-      `Ship (size: ${this.#size}) has been hit ${this.#timesHit} times`,
-    );
+    // console.log(
+    //   `Ship (size: ${this.#size}) has been hit ${this.#timesHit} times`,
+    // );
     return;
   }
 };
