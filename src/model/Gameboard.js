@@ -143,6 +143,32 @@ const Gameboard = class {
     // Check tiles and place ships in board
     return this.#traverseBoardTiles(shipInstance, tileIndex, verticalPosition);
   }
+
+  receiveAttack(rowSelected, colSelected) {
+    /**
+     * Take a pair of coordinates, determines whether or not the attack hit a ship
+     * and then send the ‘hit’ function to the correct ship, or mark that tile as hit.
+     * @param {number} rowSelected - number between 1 and 10,
+     * @param {string} colSelected - Char from A to J, Represents the board columns
+     * @returns {boolean} true if a valid ship was hit, otherwise false
+     */
+
+    const selectedIndex = this.#getIndexfromCoordinates(
+      rowSelected,
+      colSelected,
+    );
+    if (0 > selectedIndex) return false; // Not valid getIndexfromCoordinates
+
+    const selectedTile = this.#arrayOfTiles[selectedIndex];
+    if (selectedTile.isHit) {
+      return false;
+    } else {
+      selectedTile.markTileAsHit();
+    }
+
+    if (selectedTile.ship instanceof Ship) selectedTile.ship.hit();
+    return true;
+  }
 };
 
 module.exports = Gameboard;

@@ -146,4 +146,37 @@ describe("Gameboard class inner methods testing", () => {
     expect(boardTest.placeShipInGameboard(shipTest1, 9, "a", true)).toBeFalsy();
     expect(boardTest.placeShipInGameboard(shipTest5, 9, "e", true)).toBeFalsy();
   });
+
+  test("Test receiveAttack method", () => {
+    const boardTest = new Gameboard();
+    const shipTest3 = new Ship(3);
+    boardTest.placeShipInGameboard(shipTest3, 3, "c");
+
+    expect(boardTest.arrayOfTiles[22].isHit).toBeFalsy();
+    expect(boardTest.arrayOfTiles[22].ship.timesHit).toEqual(0);
+    expect(boardTest.receiveAttack(3, "c")).toBeTruthy();
+    expect(boardTest.arrayOfTiles[22].ship.timesHit).toEqual(1);
+    expect(boardTest.arrayOfTiles[22].ship.isSunk).toBeFalsy();
+    expect(boardTest.arrayOfTiles[22].isHit).toBeTruthy();
+
+    expect(boardTest.receiveAttack(3, "c")).toBeFalsy();
+
+    expect(boardTest.arrayOfTiles[32].isHit).toBeFalsy();
+    expect(boardTest.arrayOfTiles[32].ship.timesHit).toEqual(1);
+    expect(boardTest.receiveAttack(4, "c")).toBeTruthy();
+    expect(boardTest.arrayOfTiles[32].ship.timesHit).toEqual(2);
+    expect(boardTest.arrayOfTiles[32].ship.isSunk).toBeFalsy();
+    expect(boardTest.arrayOfTiles[32].isHit).toBeTruthy();
+
+    expect(boardTest.arrayOfTiles[42].isHit).toBeFalsy();
+    expect(boardTest.arrayOfTiles[42].ship.timesHit).toEqual(2);
+    expect(boardTest.receiveAttack(5, "c")).toBeTruthy();
+    expect(boardTest.arrayOfTiles[42].ship.timesHit).toEqual(3);
+    expect(boardTest.arrayOfTiles[42].ship.isSunk).toBeTruthy();
+    expect(boardTest.arrayOfTiles[42].isHit).toBeTruthy();
+
+    expect(boardTest.receiveAttack(0, "a")).toBeFalsy();
+    expect(boardTest.receiveAttack(1, "a")).toBeTruthy();
+    expect(boardTest.receiveAttack(1, "a")).toBeFalsy();
+  });
 });
