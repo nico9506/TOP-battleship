@@ -150,24 +150,29 @@ const Gameboard = class {
      * and then send the ‘hit’ function to the correct ship, or mark that tile as hit.
      * @param {number} rowSelected - number between 1 and 10,
      * @param {string} colSelected - Char from A to J, Represents the board columns
-     * @returns {boolean} true if a valid ship was hit, otherwise false
+     * @returns {Object} firs element: true if a valid tile was hit, otherwise false.
+     * Second element: true if a ship was hit, otherwise false
      */
 
     const selectedIndex = this.#getIndexfromCoordinates(
       rowSelected,
       colSelected,
     );
-    if (0 > selectedIndex) return false; // Not valid getIndexfromCoordinates
+    if (0 > selectedIndex) return { tileHit: false, shipHit: false }; // Not valid getIndexfromCoordinates
 
     const selectedTile = this.#arrayOfTiles[selectedIndex];
     if (selectedTile.isHit) {
-      return false;
+      return { tileHit: false, shipHit: false };
     } else {
       selectedTile.markTileAsHit();
     }
 
-    if (selectedTile.ship instanceof Ship) selectedTile.ship.hit();
-    return true;
+    if (selectedTile.ship instanceof Ship) {
+      selectedTile.ship.hit();
+      return { tileHit: true, shipHit: true };
+    }
+
+    return { tileHit: true, shipHit: false };
   }
 };
 
