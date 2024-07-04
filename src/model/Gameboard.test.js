@@ -199,5 +199,15 @@ describe("Gameboard class inner methods testing", () => {
       tileHit: false,
       shipHit: false,
     });
+
+    expect(boardTest.receiveAttackAtIndex(99)).toMatchObject({
+      tileHit: true,
+      shipHit: false,
+    });
+
+    expect(boardTest.receiveAttackAtIndex(99)).toMatchObject({
+      tileHit: false,
+      shipHit: false,
+    });
   });
 });
