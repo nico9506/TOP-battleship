@@ -62,3 +62,5 @@ const Player = class {
     return shipHit ? this.makeRandomMovement(opponentsBoard) : true;
   }
 };
+
+module.exports = Player;
