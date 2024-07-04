@@ -24,4 +24,21 @@ describe("Test inner methods of Player class", () => {
     expect(human.isHumanPlayer).toBeTruthy();
     expect(pc.isHumanPlayer).toBeFalsy();
   });
+
+  test("check random shots to the opponent's board", () => {
+    const human = new Player("Human", true);
+    const pc = new Player("PC", false);
+
+    expect(pc.tilesAvailable.length).toBe(100);
+
+    for (let i = 0; i < 100; i++) {
+      expect(pc.makeRandomMovement(human.gameboard)).toBeTruthy();
+    }
+
+    expect(pc.tilesAvailable.length).toBe(0);
+
+    expect(pc.makeRandomMovement(human.gameboard)).toBeFalsy();
+
+    expect(human.makeRandomMovement(pc.gameboard)).toBeFalsy();
+  });
 });
