@@ -25,9 +25,7 @@
   /* Elements height */
   --navbar-h: 3.8rem;
   --side-panel-length: 15rem;
-  --content-h: calc(
-    100vh - var(--navbar-h) - var(--footer-h) - var(--side-panel-length)
-  );
+  --content-h: calc(100vh - var(--navbar-h) - var(--footer-h));
   --footer-h: 3rem;
 
   /* Font size */
@@ -45,8 +43,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-family: "Courier New", Courier, monospace;
   color: var(--ct-darker);
 }
 
@@ -54,19 +51,10 @@ body {
   background-color: var(--ct-grey);
   display: grid;
   grid-template:
-    var(--navbar-h) var(--side-panel-length) var(--content-h) var(--footer-h)
+    var(--navbar-h) var(--content-h) var(--footer-h)
     / 1fr;
   grid-template-areas:
     "navbar"
-    "side-panel"
-    "main-content"
-    "footer";
-}
-
-.hidden {
-  grid-template-areas:
-    "navbar"
-    "main-content"
     "main-content"
     "footer";
 }
@@ -95,18 +83,15 @@ nav {
   filter: var(--filter-light);
 }
 
-.logo:hover {
-  cursor: pointer;
-  filter: var(--filter-numix);
-}
+/*.logo:hover {*/
+/*  cursor: pointer;*/
+/*  filter: var(--filter-numix);*/
+/*}*/
 
 .app-name {
-  display: none;
+  display: block;
   color: var(--ct-light);
-  font-family: cursive, sans-serif;
-  font-style: italic;
-  font-size: var(--header-fs);
-  padding-top: 10px;
+  font-size: var(--logo-fs);
 }
 
 .btn-icon-label {
@@ -115,8 +100,8 @@ nav {
   align-items: center;
   gap: 0rem;
   padding: 0.5rem;
-  font-size: 0; /*0px to hide the label*/
-  border-radius: 30px;
+  font-size: var(--navbar-fs); /*0px to hide the label*/
+  /*border-radius: 30px;*/
   border: 0 none;
   background-color: var(--ct-light);
   text-transform: capitalize;
@@ -141,7 +126,38 @@ nav {
 }
 
 /* --------------------- Section -------------------- */
-/* --------------------- Section -------------------- */
+
+/* --------------------- Footer -------------------- */
+footer {
+  grid-area: footer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--ct-darker);
+}
+
+footer > .github-contact-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+footer > .github-contact-info > .footer-logo {
+  width: var(--logo-fs);
+  filter: var(--filter-numix);
+}
+
+footer > .github-contact-info > .github-user {
+  font-size: var(--logo-fs);
+  color: var(--ct-light);
+}
+
+footer > .github-contact-info > .github-user:hover {
+  color: var(--ct-numix);
+}
 /* --------------------- Section -------------------- */
 
 /* Extra small devices (phones, 600px and down) */

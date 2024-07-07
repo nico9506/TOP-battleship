@@ -9,4 +9,5 @@ import "./style.css";
   const body = document.body;
 
   body.appendChild(viewElements.generateNavigationBar());
+  body.appendChild(viewElements.generateFooter());
 })();
