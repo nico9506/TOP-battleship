@@ -1,13 +1,12 @@
-import { sayHelloWorld } from "./home";
+const viewElements = require("./view/home.js");
 import "./style.css";
 
-
 (function generateWebPage() {
-    /**
-     * Load the components to create and show the HTML elements
-     */
+  /**
+   * Load the components to create and show the HTML elements
+   */
 
-    const body = document.body;
+  const body = document.body;
 
-    body.appendChild(sayHelloWorld());
+  body.appendChild(viewElements.generateNavigationBar());
 })();
