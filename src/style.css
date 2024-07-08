@@ -94,7 +94,8 @@ nav {
   font-size: var(--logo-fs);
 }
 
-.btn-icon-label {
+.btn-icon-label,
+.btn-form {
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
@@ -112,7 +113,8 @@ nav {
   filter: var(--filter-darker);
 }
 
-.btn-icon-label:hover {
+.btn-icon-label:hover,
+.btn-form:hover {
   cursor: pointer;
   background-color: var(--ct-numix);
 }
@@ -125,8 +127,57 @@ nav {
   margin-bottom: 2rem;
 }
 
-/* --------------------- Section -------------------- */
+/* --------------------- .popup-player -------------------- */
+.popup-new-game {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  height: fit-content;
+  padding: 0.5rem;
+  background-color: var(--ct-darker);
+  /*border-radius: 10px;*/
+  width: min(100%, 24rem);
+  display: none;
+}
 
+.popup-title {
+  color: var(--ct-light);
+  text-align: center;
+  width: 100%;
+}
+
+.popup-new-game > .form-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.popup-new-game > .form-container > .player-fields {
+  width: 50%;
+  height: 100%;
+  padding: 1rem 0;
+}
+
+.popup-new-game > .form-container > .player-fields > label {
+  color: var(--ct-light);
+  width: 100%;
+  text-align: left;
+}
+
+.popup-new-game > .form-container > .player-fields > input[type="text"] {
+  margin-bottom: 0.5rem;
+}
+
+.popup-new-game > .form-container > .player-fields > input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
+
+.popup-new-game > .form-container > button {
+  margin: 0 auto;
+  font-size: 1rem;
+}
 /* --------------------- Footer -------------------- */
 footer {
   grid-area: footer;

@@ -91,7 +91,7 @@ const generateFieldsToSetUpPlayers = (playerNumber) => {
   // Player Name
   const labelPlayerName = document.createElement("label");
   labelPlayerName.setAttribute("for", "player" + playerNumber + "Name");
-  labelPlayerName.textContent = "Player" + playerNumber + " name: ";
+  labelPlayerName.textContent = "Player " + playerNumber;
   container.appendChild(labelPlayerName);
 
   const inputPlayerName = document.createElement("input");
