@@ -39,6 +39,85 @@ const generateNavigationBar = () => {
   return navbar;
 };
 
+const generateNewGamePopup = () => {
+  /**
+   * Generates the HTML container with the menu t set up a new Game
+   */
+
+  const POPUP_TITLE = "New Game";
+  const BTN_LABEL_ACCEPT = "Start!";
+
+  const popupForm = document.createElement("div");
+  popupForm.id = "new_game_popup";
+  popupForm.classList.add("popup-new-game");
+
+  const form = document.createElement("form");
+  form.classList.add("form-container");
+  form.action = "javascript:void(0);";
+
+  const title = document.createElement("h1");
+  title.classList.add("popup-title");
+  title.textContent = POPUP_TITLE;
+  form.appendChild(title);
+
+  // Fields
+  form.appendChild(generateFieldsToSetUpPlayers(1));
+  form.appendChild(generateFieldsToSetUpPlayers(2));
+
+  // button
+  const acceptButton = document.createElement("button");
+  acceptButton.type = "submit";
+  acceptButton.id = "accept_players";
+  acceptButton.classList.add("btn-form");
+  acceptButton.value = "Accept";
+  acceptButton.textContent = "Continue";
+  form.appendChild(acceptButton);
+
+  popupForm.appendChild(form);
+
+  return popupForm;
+};
+
+const generateFieldsToSetUpPlayers = (playerNumber) => {
+  /**
+   * Generates the form fields (name and type) for setting up players
+   * @param {number} playerNumber - to create strings for Player 1 and Player 2
+   * @returns {HTMLDivElement}
+   */
+
+  const container = document.createElement("div");
+  container.classList.add("player-fields");
+
+  // Player Name
+  const labelPlayerName = document.createElement("label");
+  labelPlayerName.setAttribute("for", "player" + playerNumber + "Name");
+  labelPlayerName.textContent = "Player" + playerNumber + " name: ";
+  container.appendChild(labelPlayerName);
+
+  const inputPlayerName = document.createElement("input");
+  inputPlayerName.type = "text";
+  inputPlayerName.id = "player" + playerNumber + "_name";
+  inputPlayerName.placeholder = "Player name";
+  inputPlayerName.name = "player" + playerNumber + "Name";
+  inputPlayerName.required;
+  container.appendChild(inputPlayerName);
+
+  // Type (Human or PC)
+  const inputPlayerType = document.createElement("input");
+  inputPlayerType.type = "checkbox";
+  inputPlayerType.id = "player_" + playerNumber + "_type";
+  inputPlayerType.value = true;
+  inputPlayerType.name = "player" + playerNumber + "Type";
+  container.appendChild(inputPlayerType);
+
+  const labelPlayerType = document.createElement("label");
+  labelPlayerType.setAttribute("for", "player" + playerNumber + "Type");
+  labelPlayerType.textContent = "Human";
+  container.appendChild(labelPlayerType);
+
+  return container;
+};
+
 const generateFooter = () => {
   /**
    * Creates the footer element and returns the HTML element
@@ -53,6 +132,7 @@ const generateFooter = () => {
   const githubLink = document.createElement("a");
   githubLink.classList.add("github-contact-info");
   githubLink.href = GITHUB_REPO_URL;
+  githubLink.target = "_blank";
 
   const logo = new Image();
   logo.src = githubIcon;
@@ -91,5 +171,5 @@ const createBtnIconLabel = (label, icon_path = null) => {
 };
 
 exports.generateNavigationBar = generateNavigationBar;
-exports.createBtnIconLabel = createBtnIconLabel;
 exports.generateFooter = generateFooter;
+exports.generateNewGamePopup = generateNewGamePopup;

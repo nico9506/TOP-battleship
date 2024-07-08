@@ -8,6 +8,12 @@ import "./style.css";
 
   const body = document.body;
 
+  // Nav bar
   body.appendChild(viewElements.generateNavigationBar());
+
+  // Footer
   body.appendChild(viewElements.generateFooter());
+
+  //Popup (new game)
+  body.appendChild(viewElements.generateNewGamePopup());
 })();
