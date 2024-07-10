@@ -59,6 +59,10 @@ body {
     "footer";
 }
 
+.popup-unhidden {
+  display: block !important;
+}
+
 /* --------------------- Nav bar -------------------- */
 nav {
   grid-area: navbar;
@@ -117,14 +121,6 @@ nav {
 .btn-form:hover {
   cursor: pointer;
   background-color: var(--ct-numix);
-}
-
-#sp_g_home {
-  margin-top: 2rem;
-}
-
-#sp_g_anytime {
-  margin-bottom: 2rem;
 }
 
 /* --------------------- .popup-player -------------------- */

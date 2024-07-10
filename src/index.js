@@ -1,4 +1,5 @@
 const viewElements = require("./view/home.js");
+const controllerListeners = require("./controller/listeners.js");
 import "./style.css";
 
 (function generateWebPage() {
@@ -16,4 +17,12 @@ import "./style.css";
 
   //Popup (new game)
   body.appendChild(viewElements.generateNewGamePopup());
+})();
+
+(function addAllEventListeners() {
+  /**
+   * Call the needed function to assing the required EventListeners
+   */
+
+  controllerListeners.assignEventListeners();
 })();

@@ -1,6 +1,8 @@
 /**
  * Creates the HTML elements to generate the DOM
  */
+
+const utilities = require("./utilities.js");
 const logo = require("../assets/logo.svg");
 const githubIcon = require("../assets/github.svg");
 
@@ -31,7 +33,7 @@ const generateNavigationBar = () => {
   titleContainer.appendChild(appName);
 
   // Add-new-task button
-  const addBtn = createBtnIconLabel(BUTTON_LABEL);
+  const addBtn = utilities.createBtnIconLabel(BUTTON_LABEL);
 
   navbar.appendChild(titleContainer);
   navbar.appendChild(addBtn);
@@ -61,8 +63,8 @@ const generateNewGamePopup = () => {
   form.appendChild(title);
 
   // Fields
-  form.appendChild(generateFieldsToSetUpPlayers(1));
-  form.appendChild(generateFieldsToSetUpPlayers(2));
+  form.appendChild(utilities.generateFieldsToSetUpPlayers(1));
+  form.appendChild(utilities.generateFieldsToSetUpPlayers(2));
 
   // button
   const acceptButton = document.createElement("button");
@@ -76,46 +78,6 @@ const generateNewGamePopup = () => {
   popupForm.appendChild(form);
 
   return popupForm;
-};
-
-const generateFieldsToSetUpPlayers = (playerNumber) => {
-  /**
-   * Generates the form fields (name and type) for setting up players
-   * @param {number} playerNumber - to create strings for Player 1 and Player 2
-   * @returns {HTMLDivElement}
-   */
-
-  const container = document.createElement("div");
-  container.classList.add("player-fields");
-
-  // Player Name
-  const labelPlayerName = document.createElement("label");
-  labelPlayerName.setAttribute("for", "player" + playerNumber + "Name");
-  labelPlayerName.textContent = "Player " + playerNumber;
-  container.appendChild(labelPlayerName);
-
-  const inputPlayerName = document.createElement("input");
-  inputPlayerName.type = "text";
-  inputPlayerName.id = "player" + playerNumber + "_name";
-  inputPlayerName.placeholder = "Player name";
-  inputPlayerName.name = "player" + playerNumber + "Name";
-  inputPlayerName.required;
-  container.appendChild(inputPlayerName);
-
-  // Type (Human or PC)
-  const inputPlayerType = document.createElement("input");
-  inputPlayerType.type = "checkbox";
-  inputPlayerType.id = "player_" + playerNumber + "_type";
-  inputPlayerType.value = true;
-  inputPlayerType.name = "player" + playerNumber + "Type";
-  container.appendChild(inputPlayerType);
-
-  const labelPlayerType = document.createElement("label");
-  labelPlayerType.setAttribute("for", "player" + playerNumber + "Type");
-  labelPlayerType.textContent = "Human";
-  container.appendChild(labelPlayerType);
-
-  return container;
 };
 
 const generateFooter = () => {
@@ -148,26 +110,6 @@ const generateFooter = () => {
   footer.appendChild(githubLink);
 
   return footer;
-};
-
-const createBtnIconLabel = (label, icon_path = null) => {
-  /**
-   * Returns a created button element containing an Icon and a text label
-   */
-
-  // Add task button contains an Icon and a label
-  const btn = document.createElement("button");
-  btn.classList.add("btn-icon-label");
-  btn.id = "btn-" + label.toLowerCase().replace(" ", "_");
-  btn.textContent = label;
-
-  if (icon_path !== null) {
-    const icon = new Image();
-    icon.src = icon_path;
-    btn.appendChild(icon);
-  }
-
-  return btn;
 };
 
 exports.generateNavigationBar = generateNavigationBar;
