@@ -123,6 +123,22 @@ nav {
   background-color: var(--ct-numix);
 }
 
+/* --------------------- Main container -------------------- */
+.mainContainer {
+  height: 100%;
+  width: 100%;
+  /*height: 90%;*/
+  /*width: max(90%, 50rem);*/
+  grid-area: main-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainContainer > img {
+  width: clamp(20rem, 90%, 50rem);
+}
+
 /* --------------------- .popup-player -------------------- */
 .popup-new-game {
   position: absolute;

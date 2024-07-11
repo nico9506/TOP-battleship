@@ -5,6 +5,7 @@
 const utilities = require("./utilities.js");
 const logo = require("../assets/logo.svg");
 const githubIcon = require("../assets/github.svg");
+const welcomeImg = require("../assets/welcomeScreen.jpg");
 
 const generateNavigationBar = () => {
   /**
@@ -39,6 +40,24 @@ const generateNavigationBar = () => {
   navbar.appendChild(addBtn);
 
   return navbar;
+};
+
+const generateMainContent = () => {
+  /**
+   * Generates the main div which contains the welcome screen and will
+   * contain the gameboards
+   */
+
+  const container = document.createElement("div");
+  container.id = "main_container";
+  container.classList.add("mainContainer");
+
+  // Fills the main container with a welcome screen
+  const imgScreen = new Image();
+  imgScreen.src = welcomeImg;
+  container.appendChild(imgScreen);
+
+  return container;
 };
 
 const generateNewGamePopup = () => {
@@ -113,5 +132,6 @@ const generateFooter = () => {
 };
 
 exports.generateNavigationBar = generateNavigationBar;
+exports.generateMainContent = generateMainContent;
 exports.generateFooter = generateFooter;
 exports.generateNewGamePopup = generateNewGamePopup;

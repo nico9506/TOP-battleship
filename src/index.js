@@ -12,6 +12,9 @@ import "./style.css";
   // Nav bar
   body.appendChild(viewElements.generateNavigationBar());
 
+  // Main container (welcome screen initially)
+  body.appendChild(viewElements.generateMainContent());
+
   // Footer
   body.appendChild(viewElements.generateFooter());
 
