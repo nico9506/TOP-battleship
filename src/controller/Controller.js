@@ -48,4 +48,4 @@ const Controller = class {
   }
 };
 
-module.exports = Player;
+module.exports = Controller;

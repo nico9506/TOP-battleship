@@ -62,5 +62,25 @@ const createBtnIconLabel = (label, icon_path = null) => {
   return btn;
 };
 
+const generateBoardToSetUpShips = (player) => {
+  const boardContainer = document.createElement("div");
+  boardContainer.classList.add("boardContainer");
+
+  for (let i = 0; i < player.gameboard.arrayOfTiles.length; i++) {
+    const newTile = document.createElement("div");
+    newTile.classList.add("tile");
+    // newTile.style.width = "1%";
+    // newTile.style.height = "1%";
+
+    if (player.gameboard.arrayOfTiles[i].ship !== null)
+      newTile.classList.add("ship");
+
+    boardContainer.appendChild(newTile);
+  }
+
+  return boardContainer;
+};
+
 exports.generateFieldsToSetUpPlayers = generateFieldsToSetUpPlayers;
 exports.createBtnIconLabel = createBtnIconLabel;
+exports.generateBoardToSetUpShips = generateBoardToSetUpShips;

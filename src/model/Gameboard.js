@@ -1,4 +1,3 @@
-const { version } = require("html-webpack-plugin");
 const Tile = require("./Tile.js");
 const Ship = require("./Ship.js");
 
