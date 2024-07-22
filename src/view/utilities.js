@@ -2,6 +2,8 @@
  * Collection of functions to assist the HTML Elements creation
  */
 
+const { evLActivateTileToPlaceShip } = require("../controller/listeners");
+
 const generateFieldsToSetUpPlayers = (playerNumber) => {
   /**
    * Generates the form fields (name and type) for setting up players
@@ -69,11 +71,13 @@ const generateBoardToSetUpShips = (player) => {
   for (let i = 0; i < player.gameboard.arrayOfTiles.length; i++) {
     const newTile = document.createElement("div");
     newTile.classList.add("tile");
-    // newTile.style.width = "1%";
-    // newTile.style.height = "1%";
+    newTile.setAttribute("index", i);
 
-    if (player.gameboard.arrayOfTiles[i].ship !== null)
+    if (player.gameboard.arrayOfTiles[i].ship !== null) {
       newTile.classList.add("ship");
+    } else {
+      newTile.addEventListener("click", evLActivateTileToPlaceShip);
+    }
 
     boardContainer.appendChild(newTile);
   }

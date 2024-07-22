@@ -1,4 +1,5 @@
 const Gameboard = require("./Gameboard.js");
+const Ship = require("./Ship.js");
 
 const Player = class {
   /**
@@ -10,12 +11,14 @@ const Player = class {
   #gameboard = null;
   #isHumanPlayer = false;
   #tilesAvailable = []; // items are pop out when the related tile is hit
+  #shipsToPlace = [];
 
   constructor(name, isHumanPlayer) {
     this.#name = name;
     this.#isHumanPlayer = isHumanPlayer;
     this.#gameboard = new Gameboard();
     this.#tilesAvailable = this.#generateArrayOfIndex();
+    this.#shipsToPlace = this.#generateShips();
   }
 
   // Getters and Setters
@@ -39,7 +42,20 @@ const Player = class {
     return this.#tilesAvailable;
   }
 
+  get shipsToPlace() {
+    return this.#shipsToPlace;
+  }
+
   // Public methods
+  shiftShipFromListToPlace() {
+    /**
+     * Remove and return the first element of the list of shipsToPlace
+     * Null if no any element
+     */
+    if (this.#shipsToPlace.length < 1) return null;
+    return this.#shipsToPlace.shift();
+  }
+
   setAsWinner() {
     this.#isWinner = true;
   }
@@ -73,6 +89,35 @@ const Player = class {
   // Private methods
   #generateArrayOfIndex() {
     return [...Array(100).keys()];
+  }
+
+  #generateShips() {
+    /**
+     * Creates 15 instances of Ship according to the game rules
+     * The 1990 Milton Bradley version of the rules specify the following ships:
+     * No.  ClassOfShip.  Size
+     * 1    Carrier       5
+     * 2    Battleship    4
+     * 3    Cruiser       3
+     * 4    Submarine     3
+     * 5    Destroyer     2
+     */
+
+    const arrayOfShips = [];
+
+    arrayOfShips.push(new Ship(5));
+    arrayOfShips.push(new Ship(4));
+    arrayOfShips.push(new Ship(4));
+
+    for (let i = 0; i < 7; i++) {
+      arrayOfShips.push(new Ship(3));
+    }
+
+    for (let i = 0; i < 5; i++) {
+      arrayOfShips.push(new Ship(2));
+    }
+
+    return arrayOfShips;
   }
 };
 

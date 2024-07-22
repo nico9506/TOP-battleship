@@ -39,7 +39,7 @@ const evLStartGameSetUp = () => {
   const player1Type = document.getElementById("player_1_type").checked;
 
   const player2Name = document.getElementById("player_2_name").value;
-  const player2Type = document.getElementById("player_2_type").value;
+  const player2Type = document.getElementById("player_2_type").checked;
 
   // Launch a new game instance
   const newController = new Controller(
@@ -61,4 +61,22 @@ const evLStartGameSetUp = () => {
   );
 };
 
+const evLActivateTileToPlaceShip = (e) => {
+  // Activate tiles to be clicked and assign ships (used to set up boards)
+
+  const tileIndex = e.target.getAttribute("index");
+
+  /**
+   *
+   *
+   * Double check global instance of Controller
+   *
+   * How to access the players ???
+   *
+   *
+   *
+   */
+};
+
 exports.assignEventListeners = assignEventListeners;
+exports.evLActivateTileToPlaceShip = evLActivateTileToPlaceShip;
