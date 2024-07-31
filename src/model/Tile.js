@@ -7,8 +7,8 @@ const Tile = class {
   #ship = null;
   #isHit = false;
 
-  constructor(ship = null) {
-    this.#ship = ship;
+  constructor() {
+    this.#ship = null;
     this.#isHit = false;
   }
 

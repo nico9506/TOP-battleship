@@ -81,7 +81,7 @@ const Gameboard = class {
       throw new Error(`Length (${shipInstance.size}) not valid`);
 
     const tilesChecked = [];
-    let tmpIndex = startIndex;
+    let tmpIndex = parseInt(startIndex);
 
     for (let i = 0; i < shipInstance.size; i++) {
       // Out of board
@@ -121,6 +121,7 @@ const Gameboard = class {
     rowSelected,
     colSelected,
     verticalPosition = true,
+    index = null,
   ) {
     /**
      * @param {Ship} shipInstance - Instance of class Ship
@@ -128,6 +129,8 @@ const Gameboard = class {
      * it is converted to a range of 0-9 to match the arrayOfTiles index;
      * @param {string} colSelected - Char from A to J, Represents the board columns
      * @param {boolean} verticalPosition - ship alignment, true for vertical, false for horizontal
+     * @param {number} index - integer from 0 to 99, optional parameter to use instead of coordinates;
+     
      * @returns {boolean} true if the shipInstance was placed in board, otherwise false
      */
 
@@ -136,7 +139,10 @@ const Gameboard = class {
 
     // Validate positioning
     // index from 0 to 99 (-1 invalid index)
-    const tileIndex = this.#getIndexfromCoordinates(rowSelected, colSelected);
+    const tileIndex =
+      index === null
+        ? this.#getIndexfromCoordinates(rowSelected, colSelected)
+        : index;
     if (tileIndex < 0 || 99 < tileIndex) return false; // Not a valid coordinate;
 
     // Check tiles and place ships in board

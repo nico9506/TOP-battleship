@@ -36,6 +36,10 @@ const Controller = class {
     return this.#currentPlayer;
   }
 
+  set currentPlayer(player) {
+    this.#currentPlayer = player;
+  }
+
   // Public methods
   nextTurn() {
     this.#currentPlayer === this.#player1

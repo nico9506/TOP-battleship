@@ -42,12 +42,20 @@ const evLStartGameSetUp = () => {
   const player2Type = document.getElementById("player_2_type").checked;
 
   // Launch a new game instance
-  const newController = new Controller(
+  Controller.gameInstance.restartInstance(
     player1Name,
     player1Type,
     player2Name,
     player2Type,
   );
+
+  if (player1Type) {
+    Controller.gameInstance.currentPlayer = Controller.gameInstance.player1;
+  } else if (player2Type) {
+    Controller.gameInstance.currentPlayer = Controller.gameInstance.player2;
+  } else {
+    Controller.gameInstance.nextTurn();
+  }
 
   // Close the popup
   evLToggleNewGamePopup();
@@ -57,7 +65,9 @@ const evLStartGameSetUp = () => {
   mainContainer.innerHTML = "";
 
   mainContainer.appendChild(
-    viewUtilities.generateBoardToSetUpShips(newController.player1),
+    viewUtilities.generateBoardToSetUpShips(
+      Controller.gameInstance.currentPlayer,
+    ),
   );
 };
 
@@ -66,6 +76,44 @@ const evLActivateTileToPlaceShip = (e) => {
 
   const tileIndex = e.target.getAttribute("index");
 
+  const boardContainer = document.getElementsByClassName("boardContainer");
+
+  const shipToPlace =
+    Controller.gameInstance.currentPlayer.shiftShipFromListToPlace();
+
+  if (shipToPlace === null) {
+    console.log(`No more ships to place`);
+    return;
+  }
+
+  let result =
+    Controller.gameInstance.currentPlayer.gameboard.placeShipInGameboard(
+      shipToPlace,
+      1,
+      "a",
+      true,
+      tileIndex,
+    );
+
+  if (!result) {
+    Controller.gameInstance.currentPlayer.shipsToPlace.unshift(shipToPlace);
+    console.log(
+      `Placement not allowed at index ${tileIndex} for ship size ${shipToPlace.size}`,
+    );
+    return;
+  }
+
+  boardContainer.innerHTML = "";
+
+  // Clean main screen
+  const mainContainer = document.getElementById("main_container");
+  mainContainer.innerHTML = "";
+
+  mainContainer.appendChild(
+    viewUtilities.generateBoardToSetUpShips(
+      Controller.gameInstance.currentPlayer,
+    ),
+  );
   /**
    *
    *
