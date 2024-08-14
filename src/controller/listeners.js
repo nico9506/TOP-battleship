@@ -91,7 +91,6 @@ const evLActivateTileToPlaceShip = (e) => {
       shipToPlace,
       1,
       "a",
-      true,
       tileIndex,
     );
 

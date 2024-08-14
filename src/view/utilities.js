@@ -82,7 +82,39 @@ const generateBoardToSetUpShips = (player) => {
     boardContainer.appendChild(newTile);
   }
 
+  document.getElementById("main_container").appendChild(generateToggleSwitch());
+
   return boardContainer;
+};
+
+const generateToggleSwitch = () => {
+  const container = document.createElement("div");
+  container.classList.add("slider-box");
+
+  const leftLabel = document.createElement("h4");
+  leftLabel.innerText = "Horizontal";
+
+  const rightLabel = document.createElement("h4");
+  rightLabel.innerText = "Vertical";
+
+  const label = document.createElement("label");
+  label.classList.add("switch");
+
+  const inputCheckbox = document.createElement("input");
+  inputCheckbox.id = "v_h_slider";
+  inputCheckbox.type = "checkbox";
+  inputCheckbox.checked = true;
+  label.appendChild(inputCheckbox);
+
+  const spanSlider = document.createElement("span");
+  spanSlider.classList.add("slider");
+  label.appendChild(spanSlider);
+
+  container.appendChild(leftLabel);
+  container.appendChild(label);
+  container.appendChild(rightLabel);
+
+  return container;
 };
 
 exports.generateFieldsToSetUpPlayers = generateFieldsToSetUpPlayers;
