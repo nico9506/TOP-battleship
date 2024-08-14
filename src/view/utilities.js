@@ -64,6 +64,14 @@ const createBtnIconLabel = (label, icon_path = null) => {
   return btn;
 };
 
+const generateCurrentPlayerLabel = (playerName) => {
+  const container = document.createElement("div");
+  container.classList.add("current-player");
+  container.innerText = playerName;
+
+  return container;
+};
+
 const generateBoardToSetUpShips = (player) => {
   const boardContainer = document.createElement("div");
   boardContainer.classList.add("boardContainer");
@@ -82,6 +90,12 @@ const generateBoardToSetUpShips = (player) => {
     boardContainer.appendChild(newTile);
   }
 
+  // Adds the current-player name
+  document
+    .getElementById("main_container")
+    .appendChild(generateCurrentPlayerLabel(player.name));
+
+  // Adds switch to place ships in v or h position
   document.getElementById("main_container").appendChild(generateToggleSwitch());
 
   return boardContainer;

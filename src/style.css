@@ -159,11 +159,22 @@ nav {
   background: blue;
 }
 
+.current-player {
+  font-size: var(--logo-fs);
+  color: var(--ct-light);
+  font-weight: 700;
+}
+
 .slider-box {
   display: flex;
   gap: 1rem;
   justify-items: center;
   align-items: center;
+  font-size: var(--content-fs);
+}
+
+.slider-box h4 {
+  color: var(--ct-light);
 }
 
 .switch {
@@ -186,7 +197,7 @@ nav {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: var(--ct-blue);
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
@@ -204,11 +215,11 @@ nav {
 }
 
 input:checked + .slider {
-  background-color: #2196f3;
+  background-color: var(--ct-blue);
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196f3;
+  box-shadow: 0 0 1px var(--ct-blue);
 }
 
 input:checked + .slider:before {

@@ -43,9 +43,9 @@ const evLStartGameSetUp = () => {
 
   // Launch a new game instance
   Controller.gameInstance.restartInstance(
-    player1Name,
+    player1Name == "" ? "Player 1" : player1Name,
     player1Type,
-    player2Name,
+    player2Name == "" ? "Player 2" : player2Name,
     player2Type,
   );
 
