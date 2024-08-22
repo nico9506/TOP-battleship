@@ -49,6 +49,12 @@ const evLStartGameSetUp = () => {
     player2Type,
   );
 
+  //fill up computer players gameboard randomly
+  if (!player1Type) Controller.gameInstance.player1.generateRandomBoard();
+  if (!player2Type) Controller.gameInstance.player2.generateRandomBoard();
+
+  // asign the initial current player
+  // Human players have to fill up their boards
   if (player1Type) {
     Controller.gameInstance.currentPlayer = Controller.gameInstance.player1;
   } else if (player2Type) {
@@ -60,15 +66,21 @@ const evLStartGameSetUp = () => {
   // Close the popup
   evLToggleNewGamePopup();
 
+  cleanUIAndGenerateBoardToPlaceShips();
+};
+
+const cleanUIAndGenerateBoardToPlaceShips = () => {
   // Clean main screen
   const mainContainer = document.getElementById("main_container");
   mainContainer.innerHTML = "";
 
-  mainContainer.appendChild(
-    viewUtilities.generateBoardToSetUpShips(
-      Controller.gameInstance.currentPlayer,
-    ),
-  );
+  if (Controller.gameInstance.currentPlayer.isHumanPlayer) {
+    mainContainer.appendChild(
+      viewUtilities.generateBoardToSetUpShips(
+        Controller.gameInstance.currentPlayer,
+      ),
+    );
+  }
 };
 
 const evLActivateTileToPlaceShip = (e) => {
@@ -83,6 +95,11 @@ const evLActivateTileToPlaceShip = (e) => {
 
   if (shipToPlace === null) {
     console.log(`No more ships to place`);
+
+    Controller.gameInstance.nextTurn();
+
+    cleanUIAndGenerateBoardToPlaceShips();
+
     return;
   }
 
@@ -113,16 +130,6 @@ const evLActivateTileToPlaceShip = (e) => {
       Controller.gameInstance.currentPlayer,
     ),
   );
-  /**
-   *
-   *
-   * Double check global instance of Controller
-   *
-   * How to access the players ???
-   *
-   *
-   *
-   */
 };
 
 exports.assignEventListeners = assignEventListeners;

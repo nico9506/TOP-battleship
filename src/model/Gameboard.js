@@ -1,6 +1,5 @@
 const Tile = require("./Tile.js");
 const Ship = require("./Ship.js");
-const { getCurrentSwitchValue } = require("../view/utilities.js");
 
 const Gameboard = class {
   /**
@@ -117,13 +116,21 @@ const Gameboard = class {
   }
 
   // Public methods
-  placeShipInGameboard(shipInstance, rowSelected, colSelected, index = null) {
+  placeShipInGameboard(
+    shipInstance,
+    rowSelected,
+    colSelected,
+    index = null,
+    orientation = null,
+  ) {
     /**
      * @param {Ship} shipInstance - Instance of class Ship
      * @param {number} rowSelected - number between 1 and 10,
      * it is converted to a range of 0-9 to match the arrayOfTiles index;
      * @param {string} colSelected - Char from A to J, Represents the board columns
      * @param {number} index - integer from 0 to 99, optional parameter to use instead of coordinates;
+     * @param {boolean} orientation - null to let the user define the ship orientation. 
+     * True or false provided to place the ship randomly
      
      * @returns {boolean} true if the shipInstance was placed in board, otherwise false
      */
@@ -139,7 +146,12 @@ const Gameboard = class {
         : index;
     if (tileIndex < 0 || 99 < tileIndex) return false; // Not a valid coordinate;
 
-    const verticalPosition = document.getElementById("v_h_slider").checked;
+    let verticalPosition = null;
+    if (orientation === null) {
+      verticalPosition = document.getElementById("v_h_slider").checked;
+    } else {
+      verticalPosition = orientation;
+    }
 
     // Check tiles and place ships in board
     return this.#traverseBoardTiles(shipInstance, tileIndex, verticalPosition);

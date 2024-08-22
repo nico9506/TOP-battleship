@@ -51,9 +51,49 @@ const Player = class {
     /**
      * Remove and return the first element of the list of shipsToPlace
      * Null if no any element
+     * returns {Ship}
      */
     if (this.#shipsToPlace.length < 1) return null;
     return this.#shipsToPlace.shift();
+  }
+
+  generateRandomBoard() {
+    /**
+     * Place the player ships in random coordinates
+     */
+
+    let randomIndex = 0;
+    let randomOrientation = false;
+    let currentShip = null;
+
+    this.#shipsToPlace.forEach((ship) => {
+      currentShip = ship;
+
+      while (currentShip !== null) {
+        // random int between 0 and 99
+        randomIndex = Math.round(Math.random() * 100);
+
+        // random int between 0 and 1
+        randomOrientation = Math.round(Math.random() * 2) === 0 ? false : true;
+
+        // true if the ship was placed, otherwise false
+        const shipPlaced = this.#gameboard.placeShipInGameboard(
+          currentShip,
+          1,
+          "a",
+          randomIndex,
+          randomOrientation,
+        );
+
+        if (shipPlaced) currentShip = null;
+      }
+    });
+
+    // clean the array as all ships were placed.
+    this.#shipsToPlace = [];
+    console.log(
+      `Ships randomly placed in gameboard. Player name: ${this.#name}, Human player: ${this.#isHumanPlayer}}`,
+    );
   }
 
   setAsWinner() {
