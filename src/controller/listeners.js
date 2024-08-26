@@ -57,8 +57,10 @@ const evLStartGameSetUp = () => {
   // Human players have to fill up their boards
   if (player1Type) {
     Controller.gameInstance.currentPlayer = Controller.gameInstance.player1;
+    Controller.gameInstance.currentOpponent = Controller.gameInstance.player2;
   } else if (player2Type) {
     Controller.gameInstance.currentPlayer = Controller.gameInstance.player2;
+    Controller.gameInstance.currentOpponent = Controller.gameInstance.player1;
   } else {
     Controller.gameInstance.nextTurn();
   }
@@ -80,6 +82,10 @@ const cleanUIAndGenerateBoardToPlaceShips = () => {
         Controller.gameInstance.currentPlayer,
       ),
     );
+  } else {
+    console.error(
+      `Current player is not human - (isHuman: ${Controller.gameInstance.currentPlayer.isHumanPlayer})`,
+    );
   }
 };
 
@@ -93,11 +99,21 @@ const evLActivateTileToPlaceShip = (e) => {
   const shipToPlace =
     Controller.gameInstance.currentPlayer.shiftShipFromListToPlace();
 
+  if (
+    shipToPlace === null &&
+    (Controller.gameInstance.currentPlayer ===
+      Controller.gameInstance.player2 ||
+      !Controller.gameInstance.currentOpponent.isHumanPlayer)
+  ) {
+    console.log("Boards configured.");
+    console.log("Launch game flow");
+    return;
+  }
+
   if (shipToPlace === null) {
     console.log(`No more ships to place`);
 
     Controller.gameInstance.nextTurn();
-
     cleanUIAndGenerateBoardToPlaceShips();
 
     return;
@@ -132,5 +148,26 @@ const evLActivateTileToPlaceShip = (e) => {
   );
 };
 
+const evLActivateTileToReceiveAttack = (index) => {
+  const { tileHit, shipHit } =
+    Controller.gameInstance.currentOpponent.gameboard.receiveAttackAtIndex(
+      index,
+    );
+
+  if (shipHit) {
+    console.log("Ship hit - eventListener");
+    return;
+  }
+
+  if (tileHit) {
+    console.log("Tile hit - eventListener");
+    return;
+  }
+
+  console.log("No tile hit");
+  return;
+};
+
 exports.assignEventListeners = assignEventListeners;
 exports.evLActivateTileToPlaceShip = evLActivateTileToPlaceShip;
+exports.evLActivateTileToReceiveAttack = evLActivateTileToReceiveAttack;

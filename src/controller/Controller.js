@@ -12,6 +12,7 @@ const Controller = class {
 
   // Player who is playing the current movement
   #currentPlayer = null;
+  #currentOpponent = null;
 
   constructor() {
     // Singleton pattern
@@ -40,11 +41,23 @@ const Controller = class {
     this.#currentPlayer = player;
   }
 
+  get currentOpponent() {
+    return this.#currentOpponent;
+  }
+
+  set currentOpponent(player) {
+    this.#currentOpponent = player;
+  }
+
   // Public methods
   nextTurn() {
-    this.#currentPlayer === this.#player1
-      ? (this.#currentPlayer = this.#player2)
-      : (this.#currentPlayer = this.#player1);
+    if (this.#currentPlayer === this.#player1) {
+      this.#currentPlayer = this.#player2;
+      this.#currentOpponent = this.#player1;
+    } else {
+      this.#currentPlayer = this.#player1;
+      this.#currentOpponent = this.#player2;
+    }
   }
 
   checkGameOver() {
@@ -64,6 +77,7 @@ const Controller = class {
     this.#player1 = new Player(player1Name, player1Human);
     this.#player2 = new Player(player2Name, player2Human);
     this.#currentPlayer = null;
+    this.currentOpponent = null;
   }
 };
 

@@ -2,7 +2,10 @@
  * Collection of functions to assist the HTML Elements creation
  */
 
-const { evLActivateTileToPlaceShip } = require("../controller/listeners");
+const {
+  evLActivateTileToPlaceShip,
+  evLActivateTileToReceiveAttack,
+} = require("../controller/listeners");
 
 const generateFieldsToSetUpPlayers = (playerNumber) => {
   /**
@@ -131,6 +134,69 @@ const generateToggleSwitch = () => {
   return container;
 };
 
+const generateHumanPlayerGameView = (player) => {
+  /**
+   * Returns the required HTML Elements to display the current player board
+   * and the opponents board to mark attacks.
+   */
+
+  const container = document.createElement("div");
+  container.classList.add("gameplay-human-view");
+
+  // Board to display current-playey ships (including destroyed units)
+  const boardContainer = document.createElement("div");
+  boardContainer.classList.add("boardContainer");
+
+  for (let i = 0; i < player.gameboard.arrayOfTiles.length; i++) {
+    const newTile = document.createElement("div");
+    newTile.classList.add("tile");
+    newTile.setAttribute("index", i);
+
+    if (player.gameboard.arrayOfTiles[i].ship !== null) {
+      newTile.classList.add("ship");
+    }
+
+    if (player.gameboard.arrayOfTiles[i].isHit) {
+      newTile.classList.add("destroyed-ship");
+    }
+
+    boardContainer.appendChild(newTile);
+  }
+
+  // Board to display current-playey attacks
+  const attacksBoardContainer = document.createElement("div");
+  attacksBoardContainer.classList.add("attacksBoardContainer");
+
+  for (let i = 0; i < player.gameboard.arrayOfTiles.length; i++) {
+    const newTile = document.createElement("div");
+    newTile.classList.add("tile");
+    newTile.setAttribute("index", i);
+
+    if (!player.tilesAvailable.includes(i)) {
+      newTile.classList.add("tile-hit");
+    } else {
+      newTile.addEventListener("click", (e) => {
+        console.log("add Ev Listener to attack opponents board");
+        const index = e.target.classList.add("using-target");
+        evLActivateTileToReceiveAttack(index);
+      });
+    }
+
+    attacksBoardContainer.appendChild(newTile);
+  }
+
+  // Adds the current-player name
+  document
+    .getElementById("main_container")
+    .appendChild(generateCurrentPlayerLabel(player.name));
+
+  container.appendChild(boardContainer);
+  container.appendChild(attacksBoardContainer);
+
+  return container;
+};
+
 exports.generateFieldsToSetUpPlayers = generateFieldsToSetUpPlayers;
 exports.createBtnIconLabel = createBtnIconLabel;
 exports.generateBoardToSetUpShips = generateBoardToSetUpShips;
+exports.generateHumanPlayerGameView = generateHumanPlayerGameView;
