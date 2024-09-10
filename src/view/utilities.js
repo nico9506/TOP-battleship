@@ -140,6 +140,9 @@ const generateHumanPlayerGameView = (player) => {
    * and the opponents board to mark attacks.
    */
 
+  const mainContainer = document.getElementById("main_container");
+  mainContainer.innerHTML = "";
+
   const container = document.createElement("div");
   container.classList.add("gameplay-human-view");
 
@@ -176,9 +179,7 @@ const generateHumanPlayerGameView = (player) => {
       newTile.classList.add("tile-hit");
     } else {
       newTile.addEventListener("click", (e) => {
-        console.log("add Ev Listener to attack opponents board");
-        const index = e.target.classList.add("using-target");
-        evLActivateTileToReceiveAttack(index);
+        evLActivateTileToReceiveAttack(e);
       });
     }
 
@@ -186,9 +187,7 @@ const generateHumanPlayerGameView = (player) => {
   }
 
   // Adds the current-player name
-  document
-    .getElementById("main_container")
-    .appendChild(generateCurrentPlayerLabel(player.name));
+  mainContainer.appendChild(generateCurrentPlayerLabel(player.name));
 
   container.appendChild(boardContainer);
   container.appendChild(attacksBoardContainer);

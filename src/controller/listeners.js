@@ -86,6 +86,10 @@ const cleanUIAndGenerateBoardToPlaceShips = () => {
     console.error(
       `Current player is not human - (isHuman: ${Controller.gameInstance.currentPlayer.isHumanPlayer})`,
     );
+
+    alert(
+      "At least one player must be Human. Click on 'New Game' button to set up a new game.",
+    );
   }
 };
 
@@ -107,6 +111,17 @@ const evLActivateTileToPlaceShip = (e) => {
   ) {
     console.log("Boards configured.");
     console.log("Launch game flow");
+
+    Controller.gameInstance.setInitialTurn();
+
+    document
+      .getElementById("main_container")
+      .appendChild(
+        viewUtilities.generateHumanPlayerGameView(
+          Controller.gameInstance.currentPlayer,
+        ),
+      );
+
     return;
   }
 
@@ -167,6 +182,12 @@ const evLActivateTileToReceiveAttack = (index) => {
   console.log("No tile hit");
   return;
 };
+
+// const performAttack = (e) => {
+//   const index = e.target.classList.add("using-target");
+//   console.log(`Index selected: ${index}`);
+//   evLActivateTileToReceiveAttack(index);
+// };
 
 exports.assignEventListeners = assignEventListeners;
 exports.evLActivateTileToPlaceShip = evLActivateTileToPlaceShip;

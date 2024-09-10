@@ -79,6 +79,11 @@ const Controller = class {
     this.#currentPlayer = null;
     this.currentOpponent = null;
   }
+
+  setInitialTurn() {
+    this.#currentPlayer = this.#player1;
+    this.#currentOpponent = this.#player2;
+  }
 };
 
 const gameInstance = new Controller();

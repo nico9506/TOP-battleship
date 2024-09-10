@@ -37,6 +37,10 @@
   --content-fs: 0.9rem;
 
   --taskRow-h: 4rem;
+
+  /* Tiles dimmension */
+  --board-dimmension: min(90vw, 40rem);
+  --tile-size: 10%;
 }
 
 * {
@@ -131,28 +135,46 @@ nav {
   /*width: max(90%, 50rem);*/
   grid-area: main-content;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   gap: 1rem;
+  overflow: auto;
+  padding: 1rem 0;
 }
 
 .mainContainer > img {
   width: clamp(20rem, 90%, 50rem);
+  position: relative;
+  bottom: -20%;
 }
 
 /* --------------- */
-.boardContainer {
-  height: 60%;
-  width: 60%;
+.boardContainer,
+.attacksBoardContainer {
+  /*height: max(60vh, 5rem);*/
+  /*width: max(60vh, 5rem);*/
+  height: var(--board-dimmension);
+  width: var(--board-dimmension);
   display: flex;
   flex-wrap: wrap;
 }
 
 .tile {
-  height: 10%;
-  width: 10%;
+  height: var(--tile-size);
+  width: var(--tile-size);
   border: 1px solid black;
+}
+
+.gameplay-human-view {
+  /*height: 90vh;*/
+  /*width: 90vw;*/
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  /*overflow: auto;*/
 }
 
 .ship {
