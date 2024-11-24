@@ -163,7 +163,10 @@ const evLActivateTileToPlaceShip = (e) => {
   );
 };
 
-const evLActivateTileToReceiveAttack = (index) => {
+const evLActivateTileToReceiveAttack = (e) => {
+
+  const index = e.target.getAttribute("index");
+
   const { tileHit, shipHit } =
     Controller.gameInstance.currentOpponent.gameboard.receiveAttackAtIndex(
       index,
