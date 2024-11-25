@@ -93,6 +93,22 @@ const cleanUIAndGenerateBoardToPlaceShips = () => {
   }
 };
 
+const cleanUIAndGenerateBoardToPlay = () => {
+  // Clean main screen
+  const mainContainer = document.getElementById("main_container");
+  mainContainer.innerHTML = "";
+
+  if (Controller.gameInstance.currentPlayer.isHumanPlayer) {
+    mainContainer.appendChild(
+      viewUtilities.generateHumanPlayerGameView(Controller.gameInstance.currentPlayer, Controller.gameInstance.currentOpponent)
+    );
+  } else {
+    console.error(
+      `Current player is not human - (isHuman: ${Controller.gameInstance.currentPlayer.isHumanPlayer})`,
+    );
+  }
+};
+
 const evLActivateTileToPlaceShip = (e) => {
   // Activate tiles to be clicked and assign ships (used to set up boards)
 
@@ -119,6 +135,7 @@ const evLActivateTileToPlaceShip = (e) => {
       .appendChild(
         viewUtilities.generateHumanPlayerGameView(
           Controller.gameInstance.currentPlayer,
+          Controller.gameInstance.currentOpponent
         ),
       );
 
@@ -174,23 +191,22 @@ const evLActivateTileToReceiveAttack = (e) => {
 
   if (shipHit) {
     console.log("Ship hit - eventListener");
-    return;
   }
 
   if (tileHit) {
     console.log("Tile hit - eventListener");
+  }
+
+  if (shipHit || tileHit) {
+    // Controller.gameInstance.currentPlayer.spliceTilesAvailable(index);
+    Controller.gameInstance.currentPlayer.gameboard.arrayOfTiles[index].markTileAsHit();
+    cleanUIAndGenerateBoardToPlay();
     return;
   }
 
   console.log("No tile hit");
   return;
 };
-
-// const performAttack = (e) => {
-//   const index = e.target.classList.add("using-target");
-//   console.log(`Index selected: ${index}`);
-//   evLActivateTileToReceiveAttack(index);
-// };
 
 exports.assignEventListeners = assignEventListeners;
 exports.evLActivateTileToPlaceShip = evLActivateTileToPlaceShip;

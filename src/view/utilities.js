@@ -134,7 +134,7 @@ const generateToggleSwitch = () => {
   return container;
 };
 
-const generateHumanPlayerGameView = (player) => {
+const generateHumanPlayerGameView = (player, opponent) => {
   /**
    * Returns the required HTML Elements to display the current player board
    * and the opponents board to mark attacks.
@@ -175,8 +175,11 @@ const generateHumanPlayerGameView = (player) => {
     newTile.classList.add("tile");
     newTile.setAttribute("index", i);
 
-    if (!player.tilesAvailable.includes(i)) {
+    if (opponent.gameboard.arrayOfTiles[i].isHit)
       newTile.classList.add("tile-hit");
+
+    if (opponent.gameboard.arrayOfTiles[i].ship !== null && opponent.gameboard.arrayOfTiles[i].isHit) {
+      newTile.classList.add("ship-hit");
     } else {
       newTile.addEventListener("click", (e) => {
         evLActivateTileToReceiveAttack(e);

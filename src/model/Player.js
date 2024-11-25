@@ -57,6 +57,13 @@ const Player = class {
     return this.#shipsToPlace.shift();
   }
 
+  /**
+   * @param {number} index
+   */
+  spliceTilesAvailable(index) {
+    this.#tilesAvailable.splice(index, 1);
+  }
+
   generateRandomBoard() {
     /**
      * Place the player ships in random coordinates
