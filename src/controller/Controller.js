@@ -61,7 +61,15 @@ const Controller = class {
   }
 
   checkGameOver() {
-    return this.#player1.isWinner || this.#player2.isWinner ? true : false;
+    if (this.#player1.tilesWithShipsSunk >= 44) {
+      this.#player1.setAsWinner();
+      return true;
+    } else if (this.#player2.tilesWithShipsSunk >= 44) {
+      this.#player2.setAsWinner();
+      return true;
+    } else {
+      return false;
+    }
   }
 
   restartInstance(

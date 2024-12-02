@@ -100,11 +100,23 @@ const cleanUIAndGenerateBoardToPlay = () => {
 
   if (Controller.gameInstance.currentPlayer.isHumanPlayer) {
     mainContainer.appendChild(
-      viewUtilities.generateHumanPlayerGameView(Controller.gameInstance.currentPlayer, Controller.gameInstance.currentOpponent)
+      viewUtilities.generateHumanPlayerGameView(
+        Controller.gameInstance.currentPlayer,
+        Controller.gameInstance.currentOpponent,
+      ),
     );
   } else {
     console.error(
       `Current player is not human - (isHuman: ${Controller.gameInstance.currentPlayer.isHumanPlayer})`,
+    );
+  }
+
+  if (Controller.gameInstance.checkGameOver()) {
+    console.log(
+      `PLAYER 1: ${Controller.gameInstance.player1.isWinner ? "WINNER" : "LOSER"}`,
+    );
+    console.log(
+      `PLAYER 2: ${Controller.gameInstance.player2.isWinner ? "WINNER" : "LOSER"}`,
     );
   }
 };
@@ -135,7 +147,7 @@ const evLActivateTileToPlaceShip = (e) => {
       .appendChild(
         viewUtilities.generateHumanPlayerGameView(
           Controller.gameInstance.currentPlayer,
-          Controller.gameInstance.currentOpponent
+          Controller.gameInstance.currentOpponent,
         ),
       );
 
@@ -181,7 +193,6 @@ const evLActivateTileToPlaceShip = (e) => {
 };
 
 const evLActivateTileToReceiveAttack = (e) => {
-
   const index = e.target.getAttribute("index");
 
   const { tileHit, shipHit } =
@@ -190,16 +201,17 @@ const evLActivateTileToReceiveAttack = (e) => {
     );
 
   if (shipHit) {
-    console.log("Ship hit - eventListener");
+    Controller.gameInstance.currentPlayer.increaseCounterOfShipsSunk();
+    console.log(
+      `Ship hit: counter increased to ${Controller.gameInstance.currentPlayer.tilesWithShipsSunk}`,
+    );
   }
 
   if (tileHit) {
-    console.log("Tile hit - eventListener");
+    console.log("Tile hit");
   }
 
   if (shipHit || tileHit) {
-    // Controller.gameInstance.currentPlayer.spliceTilesAvailable(index);
-    Controller.gameInstance.currentPlayer.gameboard.arrayOfTiles[index].markTileAsHit();
     cleanUIAndGenerateBoardToPlay();
     return;
   }

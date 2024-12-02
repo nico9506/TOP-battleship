@@ -178,7 +178,10 @@ const generateHumanPlayerGameView = (player, opponent) => {
     if (opponent.gameboard.arrayOfTiles[i].isHit)
       newTile.classList.add("tile-hit");
 
-    if (opponent.gameboard.arrayOfTiles[i].ship !== null && opponent.gameboard.arrayOfTiles[i].isHit) {
+    if (
+      opponent.gameboard.arrayOfTiles[i].ship !== null &&
+      opponent.gameboard.arrayOfTiles[i].isHit
+    ) {
       newTile.classList.add("ship-hit");
     } else {
       newTile.addEventListener("click", (e) => {

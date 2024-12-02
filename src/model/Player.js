@@ -12,6 +12,7 @@ const Player = class {
   #isHumanPlayer = false;
   #tilesAvailable = []; // items are pop out when the related tile is hit
   #shipsToPlace = [];
+  #tilesWithShipsSunk = 0; // 44 is the maximum for this game set up
 
   constructor(name, isHumanPlayer) {
     this.#name = name;
@@ -46,7 +47,15 @@ const Player = class {
     return this.#shipsToPlace;
   }
 
+  get tilesWithShipsSunk() {
+    return this.#tilesWithShipsSunk;
+  }
+
   // Public methods
+  increaseCounterOfShipsSunk() {
+    this.#tilesWithShipsSunk++;
+  }
+
   shiftShipFromListToPlace() {
     /**
      * Remove and return the first element of the list of shipsToPlace
