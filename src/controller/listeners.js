@@ -212,6 +212,17 @@ const evLActivateTileToReceiveAttack = (e) => {
   }
 
   if (shipHit || tileHit) {
+    if (!Controller.gameInstance.currentOpponent.isHumanPlayer) {
+      const nextMov =
+        Controller.gameInstance.currentOpponent.makeRandomMovement(
+          Controller.gameInstance.currentPlayer.gameboard,
+        );
+      console.log(`Opponent random attack: ${nextMov}`);
+      console.log(
+        `Oppenent's sunk counter: ${Controller.gameInstance.currentOpponent.tilesWithShipsSunk}`,
+      );
+    }
+
     cleanUIAndGenerateBoardToPlay();
     return;
   }

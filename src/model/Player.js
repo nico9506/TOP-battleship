@@ -139,6 +139,9 @@ const Player = class {
 
     this.#tilesAvailable.splice(randomIndexFromLength, 1);
 
+    // increase counter to check winning condition
+    this.#tilesWithShipsSunk++;
+
     return shipHit ? this.makeRandomMovement(opponentsBoard) : true;
   }
 
