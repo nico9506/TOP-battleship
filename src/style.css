@@ -9,12 +9,18 @@
   --ct-light: #dcdcdc;
   --ct-white: #ffffff;
   /* Color theme (filter) for SVG images */
-  --filter-darker: invert(11%) sepia(0%) saturate(0%) hue-rotate(217deg) brightness(102%) contrast(84%);
-  --filter-dark: invert(15%) sepia(0%) saturate(1327%) hue-rotate(271deg) brightness(101%) contrast(74%);
-  --filter-grey: invert(32%) sepia(0%) saturate(0%) hue-rotate(320deg) brightness(95%) contrast(89%);
-  --filter-numix: invert(34%) sepia(22%) saturate(6773%) hue-rotate(345deg) brightness(92%) contrast(80%);
-  --filter-light: invert(99%) sepia(0%) saturate(4028%) hue-rotate(193deg) brightness(123%) contrast(73%);
-  --filter-white: invert(93%) sepia(100%) saturate(0%) hue-rotate(37deg) brightness(105%) contrast(102%);
+  --filter-darker: invert(11%) sepia(0%) saturate(0%) hue-rotate(217deg)
+    brightness(102%) contrast(84%);
+  --filter-dark: invert(15%) sepia(0%) saturate(1327%) hue-rotate(271deg)
+    brightness(101%) contrast(74%);
+  --filter-grey: invert(32%) sepia(0%) saturate(0%) hue-rotate(320deg)
+    brightness(95%) contrast(89%);
+  --filter-numix: invert(34%) sepia(22%) saturate(6773%) hue-rotate(345deg)
+    brightness(92%) contrast(80%);
+  --filter-light: invert(99%) sepia(0%) saturate(4028%) hue-rotate(193deg)
+    brightness(123%) contrast(73%);
+  --filter-white: invert(93%) sepia(100%) saturate(0%) hue-rotate(37deg)
+    brightness(105%) contrast(102%);
 
   /* Elements height */
   --navbar-h: 3.8rem;
@@ -48,8 +54,7 @@
 body {
   background-color: var(--ct-grey);
   display: grid;
-  grid-template:
-    var(--navbar-h) var(--content-h) var(--footer-h) / 1fr;
+  grid-template: var(--navbar-h) var(--content-h) var(--footer-h) / 1fr;
   grid-template-areas:
     "navbar"
     "main-content"
@@ -110,7 +115,7 @@ nav {
   text-transform: capitalize;
 }
 
-.btn-icon-label>img {
+.btn-icon-label > img {
   width: var(--header-fs);
   filter: var(--filter-darker);
 }
@@ -137,7 +142,7 @@ nav {
   padding: 1rem 0;
 }
 
-.mainContainer>img {
+.mainContainer > img {
   width: clamp(20rem, 90%, 50rem);
   position: relative;
   bottom: -20%;
@@ -179,7 +184,10 @@ nav {
   background: white;
 }
 
-.ship-hit {
+/*ship-hit is used to display player's attacks*/
+/*.destroyed-ship is used to display opponent's attacks*/
+.ship-hit,
+.destroyed-ship {
   background: red !important;
 }
 
@@ -238,15 +246,15 @@ nav {
   transition: 0.4s;
 }
 
-input:checked+.slider {
+input:checked + .slider {
   background-color: var(--ct-blue);
 }
 
-input:focus+.slider {
+input:focus + .slider {
   box-shadow: 0 0 1px var(--ct-blue);
 }
 
-input:checked+.slider:before {
+input:checked + .slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
@@ -274,32 +282,32 @@ input:checked+.slider:before {
   width: 100%;
 }
 
-.popup-new-game>.form-container {
+.popup-new-game > .form-container {
   display: flex;
   flex-wrap: wrap;
 }
 
-.popup-new-game>.form-container>.player-fields {
+.popup-new-game > .form-container > .player-fields {
   width: 50%;
   height: 100%;
   padding: 1rem 0;
 }
 
-.popup-new-game>.form-container>.player-fields>label {
+.popup-new-game > .form-container > .player-fields > label {
   color: var(--ct-light);
   width: 100%;
   text-align: left;
 }
 
-.popup-new-game>.form-container>.player-fields>input[type="text"] {
+.popup-new-game > .form-container > .player-fields > input[type="text"] {
   margin-bottom: 0.5rem;
 }
 
-.popup-new-game>.form-container>.player-fields>input[type="checkbox"] {
+.popup-new-game > .form-container > .player-fields > input[type="checkbox"] {
   margin-right: 0.5rem;
 }
 
-.popup-new-game>.form-container>button {
+.popup-new-game > .form-container > button {
   margin: 0 auto;
   font-size: 1rem;
 }
@@ -313,7 +321,7 @@ footer {
   background-color: var(--ct-darker);
 }
 
-footer>.github-contact-info {
+footer > .github-contact-info {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -322,24 +330,25 @@ footer>.github-contact-info {
   text-decoration: none;
 }
 
-footer>.github-contact-info>.footer-logo {
+footer > .github-contact-info > .footer-logo {
   width: var(--logo-fs);
   filter: var(--filter-numix);
 }
 
-footer>.github-contact-info>.github-user {
+footer > .github-contact-info > .github-user {
   font-size: var(--logo-fs);
   color: var(--ct-light);
 }
 
-footer>.github-contact-info>.github-user:hover {
+footer > .github-contact-info > .github-user:hover {
   color: var(--ct-numix);
 }
 
 /* --------------------- Section -------------------- */
 
 /* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {}
+@media only screen and (max-width: 600px) {
+}
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
@@ -370,10 +379,12 @@ footer>.github-contact-info>.github-user:hover {
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {}
+@media only screen and (min-width: 992px) {
+}
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {}
+@media only screen and (min-width: 1200px) {
+}
 
 /* ------------------------ Animations --------------------*/
 @keyframes fadeIn {

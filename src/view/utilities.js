@@ -155,12 +155,15 @@ const generateHumanPlayerGameView = (player, opponent) => {
     newTile.classList.add("tile");
     newTile.setAttribute("index", i);
 
-    if (player.gameboard.arrayOfTiles[i].ship !== null) {
-      newTile.classList.add("ship");
+    if (player.gameboard.arrayOfTiles[i].isHit) {
+      newTile.classList.add("tile-hit");
     }
 
-    if (player.gameboard.arrayOfTiles[i].isHit) {
-      newTile.classList.add("destroyed-ship");
+    if (player.gameboard.arrayOfTiles[i].ship !== null) {
+      newTile.classList.add("ship");
+      if (player.gameboard.arrayOfTiles[i].isHit) {
+        newTile.classList.add("destroyed-ship");
+      }
     }
 
     boardContainer.appendChild(newTile);

@@ -205,13 +205,13 @@ const evLActivateTileToReceiveAttack = (e) => {
     console.log(
       `Ship hit: counter increased to ${Controller.gameInstance.currentPlayer.tilesWithShipsSunk}`,
     );
+
+    cleanUIAndGenerateBoardToPlay();
+    return;
   }
 
   if (tileHit) {
     console.log("Tile hit");
-  }
-
-  if (shipHit || tileHit) {
     if (!Controller.gameInstance.currentOpponent.isHumanPlayer) {
       const nextMov =
         Controller.gameInstance.currentOpponent.makeRandomMovement(
