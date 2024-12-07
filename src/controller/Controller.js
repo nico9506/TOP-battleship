@@ -85,12 +85,21 @@ const Controller = class {
     this.#player1 = new Player(player1Name, player1Human);
     this.#player2 = new Player(player2Name, player2Human);
     this.#currentPlayer = null;
-    this.currentOpponent = null;
+    this.#currentOpponent = null;
   }
 
   setInitialTurn() {
-    this.#currentPlayer = this.#player1;
-    this.#currentOpponent = this.#player2;
+    if (this.#player1.isHumanPlayer) {
+      this.#currentPlayer = this.#player1;
+      this.#currentOpponent = this.#player2;
+    } else if (this.#player2.isHumanPlayer) {
+      this.#currentPlayer = this.#player2;
+      this.#currentOpponent = this.#player1;
+    } else {
+      this.#currentPlayer = null;
+      this.#currentOpponent = null;
+      console.error("No human players");
+    }
   }
 };
 

@@ -94,8 +94,32 @@ const cleanUIAndGenerateBoardToPlaceShips = () => {
 };
 
 const cleanUIAndGenerateBoardToPlay = () => {
-  // Clean main screen
   const mainContainer = document.getElementById("main_container");
+
+  if (Controller.gameInstance.checkGameOver()) {
+    console.log(
+      `PLAYER 1: ${Controller.gameInstance.player1.isWinner ? "WINNER" : "LOSER"}`,
+    );
+    console.log(
+      `PLAYER 2: ${Controller.gameInstance.player2.isWinner ? "WINNER" : "LOSER"}`,
+    );
+
+    // creates and replaces with a copy a specific element. USed to clean EventListeners
+    const cleanCopy = mainContainer.cloneNode(true);
+    mainContainer.parentNode.replaceChild(cleanCopy, mainContainer);
+
+    const winner = Controller.gameInstance.player1.isWinner
+      ? Controller.gameInstance.player1.name
+      : Controller.gameInstance.player2.name;
+    const banner = document.createElement("h1");
+    banner.innerText = `${winner} wins!`;
+    banner.classList.add("winner-banner");
+    cleanCopy.appendChild(banner);
+
+    return;
+  }
+
+  // Clean main screen
   mainContainer.innerHTML = "";
 
   if (Controller.gameInstance.currentPlayer.isHumanPlayer) {
@@ -108,15 +132,6 @@ const cleanUIAndGenerateBoardToPlay = () => {
   } else {
     console.error(
       `Current player is not human - (isHuman: ${Controller.gameInstance.currentPlayer.isHumanPlayer})`,
-    );
-  }
-
-  if (Controller.gameInstance.checkGameOver()) {
-    console.log(
-      `PLAYER 1: ${Controller.gameInstance.player1.isWinner ? "WINNER" : "LOSER"}`,
-    );
-    console.log(
-      `PLAYER 2: ${Controller.gameInstance.player2.isWinner ? "WINNER" : "LOSER"}`,
     );
   }
 };
